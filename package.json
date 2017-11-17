@@ -1,0 +1,29 @@
+{
+  "name": "flobject",
+  "version": "0.0.1",
+  "description": "Simple object mapper/flattening",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack --config webpack.config.js --progress --watch",
+    "test": "nyc mocha --require babel-register \"src/**/*.test.js\"",
+    "test:watch": "nyc mocha --require babel-register \"src/**/*.test.js\" --watch"
+  },
+  "author": "Garth Stevens",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.11.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
