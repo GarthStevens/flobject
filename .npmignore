@@ -1,0 +1,4 @@
+# ignore everything but the package.json and built files
+*
+!package.json
+!dist/**/*
