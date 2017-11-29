@@ -4,20 +4,26 @@ import {ObjectMap} from '../objectMap';
 
 */
 class Mapper {
-  constructor(options) {
-    this.maps = {};
-    this.options = options || {
-
+  constructor(options = {}) {
+    this.options = {
+      maps: options.maps || {}
     };
+
+    this.maps = Object.keys(this.options.maps)
+      .reduce((prev, current, arr) => new ObjectMap({
+        mapper: this,
+        maps: {
+          ...prev,
+          current: arr[current]}
+      }), {});
   }
 
   register(name) {
-    const map = new ObjectMap(this);
+    const map = new ObjectMap({
+      mapper: this
+    });
 
-    this.maps = {
-      ...this.maps,
-      [name]: map
-    };
+    this.maps[name] = map;
 
     return map;
   }

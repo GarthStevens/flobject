@@ -1,27 +1,33 @@
 {
   "name": "flobject",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple object mapper/flattening",
-  "main": "index.js",
+  "main": "./dist/es5/index.js",
   "scripts": {
-    "watch": "webpack --config webpack.config.js --progress --watch",
-    "test": "nyc mocha --require babel-register \"src/**/*.test.js\"",
-    "test:watch": "nyc mocha --require babel-register \"src/**/*.test.js\" --watch"
+    "clean": "del-cli -f ./dist",
+    "lint": "eslint ./src --ext .js,.jsx",
+    "watch": "concurrently --kill-others \"npm run watch:scripts\" \"npm run watch:tests\"",
+    "build-es-next": "cross-env BABEL_ENV=es-next babel ./src --source-maps --out-dir ./dist/es-next",
+    "build-es5": "cross-env BABEL_ENV=es5 babel ./src --source-maps --out-dir ./dist/es5",
+    "build": "npm run build-es-next && npm run build-es5",
+    "watch:scripts": "npm run build-es-next  -- --watch && npm run build-es5 -- --watch",
+    "test": "mocha --require ./dist/es5/_.test.js ./dist/es5",
+    "watch:tests": "npm run test -- --watch"
   },
   "author": "Garth Stevens",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
-    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.1",
+    "del-cli": "^1.1.0",
     "eslint": "^4.11.0",
-    "mocha": "^4.0.1",
-    "nyc": "^11.3.0",
-    "webpack": "^3.8.1"
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0"

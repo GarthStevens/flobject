@@ -5,11 +5,11 @@ class ObjectMap {
 
   /** Create an ObjectMap
    * @constructor
-   * @param {Mapper} mapper - Reference to the parent mapper.
+   * @param {Object} options
    */
-  constructor(mapper) {
-    this.mapper = mapper;
-    this.maps = {};
+  constructor(options) {
+    this.mapper = options.mapper;
+    this.maps = options.maps || {};
   }
 
   /**
@@ -18,10 +18,7 @@ class ObjectMap {
    * @param {*} sourceMapping - A function that returns the value from the source field.
    */
   field(destination, sourceMapping) {
-    this.maps = {
-      ...this.maps,
-      [destination]: sourceMapping
-    };
+    this.maps[destination] = sourceMapping;
 
     return this;
   }

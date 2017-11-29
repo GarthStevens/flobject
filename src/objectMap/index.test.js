@@ -9,7 +9,7 @@ describe('ObjectMap', () => {
       const mapping2 = a => a.sourceObject.testField2;
 
 
-      const objectMap = new ObjectMap(null)
+      const objectMap = new ObjectMap({mapper: null})
         .field('field1', mapping1)
         .field('field2', mapping2);
 
